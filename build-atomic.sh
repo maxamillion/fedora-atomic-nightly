@@ -24,21 +24,16 @@ spin_kick_dir="/spin-kickstarts"
 spin_kick_lorax_embed="atomic-installer/lorax-embed-repo.tmpl"
 spin_kick_lorax_conf="atomic-installer/lorax-configure-repo.tmpl"
 
-mock_src="fedora-${fed_ver}-${fed_arch}"
-mock_target="fedora-${fed_ver}-compose-${fed_arch}"
+mock_target="fedora-${fed_ver}-${fed_arch}"
 mock_cmd="mock -r ${mock_target}"
 
 build_deps="rpm-ostree lorax git"
 
 atomic_dest="/atomic-repo"
-
-#FIXME - Not entirely sure we need to bind mount this
-#if ! [[ -f /etc/mock/${mock_target}.cfg ]]; then
-#    cp /etc/mock/${mock_src}.cfg /etc/mock/${mock_target}.cfg
-#    printf \
-#        "config_opts['plugin_conf']['bind_mount_opts']['dirs'].append(('/dev', '/dev' ))\n" \
-#        >> /etc/mock/${mock_target}.cfg
-#fi
+atomic_images_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/os/images"
+atomic_iso_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/"
+printf "RUNNINING CMD: ${cmd}\n"
+${mock_cmd} --shell "${cmd}" || exit 1
 
 #### Clean previous environment
 ${mock_cmd} --clean || exit 1
@@ -109,8 +104,12 @@ cmd="lorax --nomacboot -p Fedora -v ${fed_ver} \
 printf "RUNNINING CMD: ${cmd}\n"
 ${mock_cmd} --shell "${cmd}" || exit 1
 
-cmd="cp -l ${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/os/images/boot.iso \
-    ${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/Fedora-Cloud_Atomic-${fed_arch}-${fed_ver}-${fed_compose}.iso"
+cmd="mkdir ${atomic_iso_dir}"
+printf "RUNNINING CMD: ${cmd}\n"
+${mock_cmd} --shell "${cmd}" || exit 1
+
+cmd="cp -l ${atomic_images_dir}/boot.iso \
+    ${atomic_iso_dir}/Fedora-Cloud_Atomic-${fed_arch}-${fed_ver}-${fed_compose}.iso"
 printf "RUNNINING CMD: ${cmd}\n"
 ${mock_cmd} --shell "${cmd}" || exit 1
 
