@@ -32,8 +32,6 @@ build_deps="rpm-ostree lorax git"
 atomic_dest="/atomic-repo"
 atomic_images_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/os/images"
 atomic_iso_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/"
-printf "RUNNINING CMD: ${cmd}\n"
-${mock_cmd} --shell "${cmd}" || exit 1
 
 #### Clean previous environment
 ${mock_cmd} --clean || exit 1
