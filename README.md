@@ -1,10 +1,10 @@
 # fedora-atomic-nightly
 Fedora Atomic Nightly Build Scripts
 
-This repository will be for scripts to build nightly/dev builds of (Fedora Atomic)[https://getfedora.org/en/cloud/download/atomic.html]
+This repository will be for scripts to build nightly/dev builds of [Fedora Atomic](https://getfedora.org/en/cloud/download/atomic.html)
 
 ## build-iso.sh
-NOTE: this script should be run as sudo and not as root because (mock)[https://fedoraproject.org/wiki/Mock?rd=Subprojects/Mock] requires the ability to drop privs
+NOTE: this script should be run as sudo and not as root because [mock](https://fedoraproject.org/wiki/Mock?rd=Subprojects/Mock) requires the ability to drop privs
 
 This script will use mock on a Fedora or CentOS machine to build the Fedora Atomic ISO installer.
 
