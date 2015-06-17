@@ -10,3 +10,5 @@ This script will use mock on a Fedora or CentOS machine to build the Fedora Atom
 
 By default it will place the result in `/var/www/html/composes/$(date +%Y-%m-%d)` but that and effectively everything else about the script can be modified using the variables at the top of the script.
 
+## clean-isos.sh
+Simple script to limit the number of historic composes to keep on disk. Defaults to 30, but is configurable. This should be run in root’s cron or in the cron of an user with sudo ALL
