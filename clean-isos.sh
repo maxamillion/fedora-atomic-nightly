@@ -15,13 +15,11 @@ http_root_dir="/var/www/html/composes"
 
 builds=( ${http_root_dir}/* )
 if [[ "${#builds[@]}" -gt "${persist_limit}" ]]; then
-    for dir in ${builds[@]:${persist_limit}:${#builds[@]}}
+    limit=$(( ${#builds[@]} - ${persist_limit} ))
+    for dir in ${builds[@]:0:${limit}}
     do
         printf "REMOVING OLD COMPOSE AT: %s\n" "${dir}"
-        rm -fr ${http_root_dir}
+        rm -fr ${dir}
     done
 
 fi
-
-
-
