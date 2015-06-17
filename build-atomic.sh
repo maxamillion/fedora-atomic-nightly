@@ -34,6 +34,9 @@ atomic_dest="/atomic-repo"
 atomic_images_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/os/images"
 atomic_iso_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/"
 
+http_root_dir="/var/www/html/composes"
+http_compose_dir="${http_root_dir}/$(date +%Y-%m-%d)"
+
 if ! [[ -f /etc/mock/${mock_target}.cfg ]]; then
     cp /etc/mock/${mock_src}.cfg /etc/mock/${mock_target}.cfg
     printf \
@@ -128,4 +131,12 @@ cmd="pushd ${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/ ; \
     popd"
 printf "RUNNINING CMD: ${cmd}\n"
 ${mock_cmd} --shell "${cmd}" || exit 1
+
+cmd="mkdir -p ${http_compose_dir}"
+printf "RUNNINING CMD: ${cmd}\n"
+${cmd}
+
+cmd="cp -r /var/lib/mock/${mock_target}/root/${atomic_dest}/* ${http_compose_dir}"
+printf "RUNNINING CMD: ${cmd}\n"
+${cmd}
 
