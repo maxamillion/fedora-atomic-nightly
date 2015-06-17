@@ -140,3 +140,6 @@ cmd="cp -r /var/lib/mock/${mock_target}/root/${atomic_dest}/* ${http_compose_dir
 printf "RUNNINING CMD: ${cmd}\n"
 ${cmd}
 
+cmd="chown -R apache:apache ${http_compose_dir}/*"
+printf "RUNNINING CMD: ${cmd}\n"
+${cmd}
