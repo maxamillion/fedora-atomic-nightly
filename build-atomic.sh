@@ -39,6 +39,10 @@ if ! [[ -f /etc/mock/${mock_target}.cfg ]]; then
     printf \
         "config_opts['plugin_conf']['bind_mount_opts']['dirs'].append(('/dev', '/dev' ))\n" \
         >> /etc/mock/${mock_target}.cfg
+
+    #FIXME (maybe?) this is a bit of a dirty hammer swing to set the buildroot name
+    sed -i "s/${mock_src}/${mock_target}/g" /etc/mock/${mock_target}.cfg
+
 fi
 
 #### Clean previous environment and setup new one
