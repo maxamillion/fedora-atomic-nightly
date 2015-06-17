@@ -24,7 +24,8 @@ spin_kick_dir="/spin-kickstarts"
 spin_kick_lorax_embed="atomic-installer/lorax-embed-repo.tmpl"
 spin_kick_lorax_conf="atomic-installer/lorax-configure-repo.tmpl"
 
-mock_target="fedora-${fed_ver}-${fed_arch}"
+mock_src="fedora-${fed_ver}-${fed_arch}"
+mock_target="fedora-${fed_ver}-compose-${fed_arch}"
 mock_cmd="mock -r ${mock_target}"
 
 build_deps="rpm-ostree lorax git"
@@ -32,6 +33,13 @@ build_deps="rpm-ostree lorax git"
 atomic_dest="/atomic-repo"
 atomic_images_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/os/images"
 atomic_iso_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/"
+
+if ! [[ -f /etc/mock/${mock_target}.cfg ]]; then
+    cp /etc/mock/${mock_src}.cfg /etc/mock/${mock_target}.cfg
+    printf \
+        "config_opts['plugin_conf']['bind_mount_opts']['dirs'].append(('/dev', '/dev' ))\n" \
+        >> /etc/mock/${mock_target}.cfg
+fi
 
 #### Clean previous environment and setup new one
 ${mock_cmd} --clean || exit 1
