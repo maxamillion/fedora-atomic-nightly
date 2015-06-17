@@ -1,11 +1,12 @@
 #!/bin/bash
 #
-# build-atomic.sh
+# build-iso.sh
 #
 # Simple script to be run in cron or otherwise scheduled for nightly builds
 # of Fedora Atomic for Project Atomic (http://www.projectatomic.io/)
 #
-# This should be in root's crontab, it will need root privs
+# This should be in the crontab of an user with sudo ALL, not root though
+# because mock needs to drop privs
 
 ##### DISCLAIMER #####
 # This is meant for nightly dev-builds, I would not recommend anyone run this
