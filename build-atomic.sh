@@ -33,7 +33,7 @@ atomic_dest="/atomic-repo"
 atomic_images_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/os/images"
 atomic_iso_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/"
 
-#### Clean previous environment
+#### Clean previous environment and setup new one
 ${mock_cmd} --clean || exit 1
 ${mock_cmd} --init || exit 1
 ${mock_cmd} --install ${build_deps} || exit 1
