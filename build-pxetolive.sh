@@ -2,8 +2,9 @@ fed_ver="22"
 fed_arch="x86_64"
 fed_compose="$(date +%Y%m%d)"
 
+# FIXME - update and use https://git.fedorahosted.org/cgit/spin-kickstarts.git/tree/fedora-cloud-atomic-pxetolive.ks
+# This kickstart is for disk image instllation using installer iso
 kickstart_name="fedora-atomic-pxe-live.ks"
-kickstart_url="https://github.com/rvykydal/anaconda-kickstarts/raw/master/atomic/${kickstart_name}"
 
 mock_src="fedora-${fed_ver}-${fed_arch}"
 mock_target="fedora-${fed_ver}-pxetolive-${fed_arch}"
@@ -22,7 +23,7 @@ http_compose_dir="${http_root_dir}/$(date +%Y-%m-%d)"
 pxetolive_diskimage_log_dir="logs/pxetolive/diskimage"
 pxetolive_liveimage_log_dir="logs/pxetolive/liveimage"
 
-diskimage_name="fedora-atomic-pxetolive-disk.raw"
+diskimage_name="fedora-atomic-pxetolive-disk-${fed_compose}.raw"
 mock_diskimage_dir="/diskimage"
 diskimage_dir="/var/tmp"
 
@@ -33,13 +34,6 @@ iso_name="Fedora-Cloud_Atomic-${fed_arch}-${fed_ver}-${fed_compose}.iso"
 
 #### Copy iso to libvirt
 cmd="cp ${http_compose_dir}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/${iso_name} /var/lib/libvirt/images"
-printf "RUNNINING CMD: ${cmd}\n"
-${cmd}
-
-# FIXME - update and use https://git.fedorahosted.org/cgit/spin-kickstarts.git/tree/fedora-cloud-atomic-pxetolive.ks
-# This kickstart is for disk image instllation using installer iso
-#### Fetch kickstart
-cmd="wget ${kickstart_url}"
 printf "RUNNINING CMD: ${cmd}\n"
 ${cmd}
 
