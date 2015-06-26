@@ -15,9 +15,7 @@ build_deps="lorax"
 atomic_dest="/atomic-repo"
 atomic_pxetolive_dir="${atomic_dest}/${fed_ver}/Cloud_Atomic/${fed_arch}/pxetolive/"
 
-# FIXME - use real directory
-#http_root_dir="/var/www/html/composes"
-http_root_dir="/root/var/www/html/composes"
+http_root_dir="/var/www/html/composes"
 http_compose_dir="${http_root_dir}/$(date +%Y-%m-%d)"
 
 pxetolive_diskimage_log_dir="logs/pxetolive/diskimage"
