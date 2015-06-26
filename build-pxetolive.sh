@@ -88,12 +88,6 @@ cmd="mkdir -p ${atomic_dest}/${pxetolive_liveimage_log_dir}"
 printf "RUNNINING CMD: ${cmd}\n"
 ${mock_cmd} --shell "${cmd}" || exit 1
 
-# FIXME - remove when the package is in stable updates
-#### HACK Use lorax-22.12-1.fc22 with patch for --resultdir
-cmd="cp ${mock_diskimage_dir}/livemedia-creator /usr/sbin/livemedia-creator"
-printf "RUNNINING CMD: ${cmd}\n"
-${mock_cmd} --shell "${cmd}" || exit 1
-
 #### Build Atomic ISO installer
 cmd="livemedia-creator \
      --make-ostree-live \
