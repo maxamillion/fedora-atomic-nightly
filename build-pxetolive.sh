@@ -115,12 +115,6 @@ printf "RUNNINING CMD: ${cmd}\n"
 ${cmd}
 
 # FIXME - do it
-##### Remove kickstart
-#cmd="rm ${kickstart_name}"
-#printf "RUNNINING CMD: ${cmd}\n"
-#${cmd}
-
-# FIXME - do it
 ##### Remove raw disk image
 #cmd="rm ${diskimage_dir}/${diskimage_name}"
 #printf "RUNNINING CMD: ${cmd}\n"
