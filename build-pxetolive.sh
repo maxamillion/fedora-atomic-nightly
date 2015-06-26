@@ -30,7 +30,8 @@ iso_name="Fedora-Cloud_Atomic-${fed_arch}-${fed_ver}-${fed_compose}.iso"
 ############## Build raw disk image on host
 # We don't probably want to run virt-install in mock.
 
-#### Copy iso to libvirt
+#### Copy iso to location accessible by virt
+# FIXME can we set permissions somehow so we don't have to cp the iso?
 cmd="cp ${http_compose_dir}/${fed_ver}/Cloud_Atomic/${fed_arch}/iso/${iso_name} /var/lib/libvirt/images"
 printf "RUNNINING CMD: ${cmd}\n"
 ${cmd}
@@ -52,6 +53,11 @@ ${cmd}
 
 #### Move livemedia-creator logs
 cmd="cp livemedia.log program.log virt-install.log ${http_compose_dir}/${pxetolive_diskimage_log_dir}"
+printf "RUNNINING CMD: ${cmd}\n"
+${cmd}
+
+#### Remove copy of iso image
+cmd="rm /var/lib/libvirt/images/${iso_name}"
 printf "RUNNINING CMD: ${cmd}\n"
 ${cmd}
 
