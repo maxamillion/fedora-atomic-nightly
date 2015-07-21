@@ -3,6 +3,11 @@ Fedora Atomic Nightly Build Scripts
 
 This repository will be for scripts to build nightly/dev builds of [Fedora Atomic](https://getfedora.org/en/cloud/download/atomic.html)
 
+NOTE: The mock config used needs to have the follow appended to it if it isn't currently present:
+```
+config_opts['plugin_conf']['bind_mount_opts']['dirs'].append(('/dev', '/dev' ))
+```
+
 
 ## build-iso.sh
 
